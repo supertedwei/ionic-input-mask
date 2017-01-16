@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+ 
 import { NavController } from 'ionic-angular';
  
 @Component({
@@ -16,9 +17,25 @@ export class HomePage {
  
     constructor(public navCtrl: NavController) {
  
+        this.masks = {
+            phoneNumber: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+            cardNumber: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+            cardExpiry: [/[0-1]/, /\d/, '/', /[1-2]/, /\d/],
+            orderCode: [/[a-zA-z]/, ':', /\d/, /\d/, /\d/, /\d/]
+        };
+ 
     }
  
     save(){
+ 
+        let unmaskedData = {
+            phoneNumber: this.phoneNumber.replace(/\D+/g, ''),
+            cardNumber: this.cardNumber.replace(/\D+/g, ''),
+            cardExpiry: this.cardExpiry.replace(/\D+/g, ''),
+            orderCode: this.orderCode.replace(/[^a-zA-Z0-9 -]/g, '')
+        };
+ 
+        console.log(unmaskedData);
  
     }
  
